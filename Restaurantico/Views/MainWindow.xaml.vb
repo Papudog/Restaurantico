@@ -1,20 +1,23 @@
 ﻿Imports System.Collections.ObjectModel
 
 Class MainWindow
-    Private Property _platoController As PlatoController
-    Public Property Platos As ObservableCollection(Of IPlato)
+    Private Property _mainViewModel As MainViewModel
 
     Sub New()
         ' This call is required by the designer.
         InitializeComponent()
 
         ' Add any initialization after the InitializeComponent() call.
-        ' Controller
-        Me._platoController = New PlatoController(New PlatoService)
-
+        ' ViewModel
+        Me._mainViewModel = New MainViewModel(New PlatoService)
+        ' Events
+        AddHandler Me._mainViewModel.ShowMessage, AddressOf MessageHandler
         ' Context
-        Me.Platos = GetAllPlatos()
-        Me.DataContext = Me
+        Me.DataContext = Me._mainViewModel
+    End Sub
+
+    Sub MessageHandler(message As String)
+        MessageBox.Show(message)
     End Sub
 
     Private Sub SidebarToggle_Click(sender As Object, e As RoutedEventArgs)
@@ -25,10 +28,6 @@ Class MainWindow
         End If
     End Sub
 
-    Private Function GetAllPlatos() As ObservableCollection(Of IPlato)
-        Return _platoController.OnGetAllPlatos()
-    End Function
-
     Private Sub ButtonGuardar_Click(sender As Object, e As RoutedEventArgs)
         Try
             Dim nombre As String = TextNombre.Text.Trim()
@@ -38,12 +37,12 @@ Class MainWindow
 
             Dim precio As Double = Double.Parse(TextPrecio.Text)
 
-            Me._platoController.OnAddPlato(New Plato With {.Nombre = nombre, .Precio = precio})
+            Me._mainViewModel.OnAddPlato(nombre, precio)
             Me.ClearForm()
         Catch ex As FormatException
-            MessageBox.Show("El precio debe ser un valor numerico")
+            MessageHandler("El precio debe ser un valor numerico")
         Catch ex As Exception
-            MessageBox.Show(ex.Message())
+            MessageHandler(ex.Message())
         End Try
     End Sub
 
@@ -54,10 +53,10 @@ Class MainWindow
                 Throw New Exception("Debe seleccionar primero un elemento")
             End If
 
-            Me._platoController.OnDeletePlato(platoIndex)
+            Me._mainViewModel.OnDeletePlato(platoIndex)
             Me.ClearForm()
         Catch ex As Exception
-            MessageBox.Show(ex.Message())
+            MessageHandler(ex.Message())
         End Try
     End Sub
 

@@ -21,8 +21,4 @@ Public Class PlatoService
     Public Sub DeletePlato(index As Integer) Implements IPlatoService.DeletePlato
         Me.PlatoList.RemoveAt(index)
     End Sub
-
-    Private Function IPlatoService_GetAllPlatos() As ObservableCollection(Of IPlato) Implements IPlatoService.GetAllPlatos
-        Return Me.PlatoList
-    End Function
 End Class
