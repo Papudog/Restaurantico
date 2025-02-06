@@ -4,8 +4,8 @@ Imports System.Runtime.CompilerServices
 
 Public Class MeseroViewModel
     Implements INotifyPropertyChanged
-    Private Property meseroService As IMeseroService
-    Private _selectedMesero As IMesero
+    Private Property _meseroService As IMeseroService
+    Private Property _selectedMesero As IMesero
 
 
     Public Property SelectedMesero As IMesero
@@ -21,7 +21,7 @@ Public Class MeseroViewModel
     Public Property Meseros As ObservableCollection(Of IMesero)
 
     Sub New(meseroService As IMeseroService)
-        Me.meseroService = meseroService
+        Me._meseroService = meseroService
         Me.Meseros = meseroService.Meseros
     End Sub
 

@@ -14,16 +14,8 @@
         Me.DataContext = Me._mainViewModel
     End Sub
 
-    Private Sub SidebarToggle_Click(sender As Object, e As RoutedEventArgs)
-        If SidebarMenu.Visibility = Visibility.Collapsed Then
-            SidebarMenu.Visibility = Visibility.Visible
-        Else
-            SidebarMenu.Visibility = Visibility.Collapsed
-        End If
-    End Sub
-
     Private Sub PlatosPage_Click(sender As Object, e As RoutedEventArgs)
-        Dim platoPage As New PlatoPage(Me._platoService)
+        Dim platoPage As New PlatoWindow(Me._platoService)
         platoPage.Show()
     End Sub
 

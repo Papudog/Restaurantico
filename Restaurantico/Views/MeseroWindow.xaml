@@ -5,42 +5,56 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Restaurantico"
         mc:Ignorable="d"
-        Title="MeseroWindow" Height="450" Width="530">
+        Title="MeseroWindow" Height="250" Width="400"
+        AllowsTransparency="true"
+        WindowStartupLocation="CenterScreen" 
+        WindowStyle="None"
+        Background="Transparent"
+        >
     <Grid>
-        <DockPanel LastChildFill="true">
-            <StackPanel DockPanel.Dock="Left" Width="250" Background="#FF363434">
-                <StackPanel Height="300">
-                    <Label Content="Datos del mesero" HorizontalAlignment="Center"/>
-                    <StackPanel HorizontalAlignment="center" Width="200">
-                        <Label Content="Nombre del mesero" HorizontalAlignment="Center"/>
-                        <TextBlock Text="{Binding SelectedMesero.Nombre}" FontSize="16" HorizontalAlignment="center"/>
-                    </StackPanel>
-                    <StackPanel HorizontalAlignment="center" Width="200">
-                        <Label Content="Mesas atendiendo" HorizontalAlignment="Center"/>
-                        <ListBox Height="150" ItemsSource="{Binding SelectedMesero}">
-                            <ListBox.ItemTemplate>
-                                <DataTemplate>
-                                    <StackPanel>
-                                        <TextBlock Text="{Binding Mesas}"/>
-                                    </StackPanel>
-                                </DataTemplate>
-                            </ListBox.ItemTemplate>
-                        </ListBox>
+        <Border CornerRadius="10" Background="#FF0A112A" BorderBrush="Transparent" BorderThickness="1" Padding="5">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0">
+                    <StackPanel Height="250">
+                        <Label Foreground="White" Content="Datos del mesero" HorizontalAlignment="Center"/>
+                        <StackPanel HorizontalAlignment="center" Width="200">
+                            <Label Foreground="White" Content="Nombre del mesero" HorizontalAlignment="Center"/>
+                            <TextBlock Foreground="White" Text="{Binding SelectedMesero.Nombre}" FontSize="16" HorizontalAlignment="center"/>
+                        </StackPanel>
+                        <StackPanel HorizontalAlignment="center" Width="200">
+                            <Label Content="Mesas atendiendo" HorizontalAlignment="Center"/>
+                            <ListBox Background="#FF070C1D" BorderBrush="#FF65A3DE" Height="100" ItemsSource="{Binding SelectedMesero}">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel>
+                                            <TextBlock Text="{Binding Mesas}"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </StackPanel>
                     </StackPanel>
                 </StackPanel>
-            </StackPanel>
-            <StackPanel>
-                <Label Content="Lista de meseros"/>
-                <ListBox Height="150" SelectedItem="{Binding SelectedMesero, Mode=TwoWay}" ItemsSource="{Binding Meseros}">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel>
-                                <TextBlock Text="{Binding Nombre}"/>
-                            </StackPanel>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
-            </StackPanel>
-        </DockPanel>
+                <StackPanel Grid.Column="1">
+                    <Label Content="Lista de meseros"/>
+                    <ListBox Height="150" SelectedItem="{Binding SelectedMesero, Mode=TwoWay}" ItemsSource="{Binding Meseros}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <TextBlock Text="{Binding Nombre}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </StackPanel>
+            </Grid>
+
+        </Border>
+
     </Grid>
 </Window>

@@ -1,5 +1,8 @@
-﻿Public Class PlatoPage
-    Private Property _mainViewModel As PlatoViewModel
+﻿Imports System.ComponentModel
+Imports System.Runtime.CompilerServices
+
+Public Class PlatoWindow
+    Private Property _platoViewModel As PlatoViewModel
 
     Sub New(platoService As IPlatoService)
 
@@ -7,11 +10,11 @@
         InitializeComponent()
 
         ' Add any initialization after the InitializeComponent() call.
-        Me._mainViewModel = New PlatoViewModel(platoService)
+        Me._platoViewModel = New PlatoViewModel(platoService)
         ' Events
-        AddHandler Me._mainViewModel.ShowMessage, AddressOf MessageHandler
+        AddHandler Me._platoViewModel.ShowMessage, AddressOf MessageHandler
         ' Context
-        Me.DataContext = Me._mainViewModel
+        Me.DataContext = Me._platoViewModel
     End Sub
 
     Sub MessageHandler(message As String)
@@ -27,7 +30,7 @@
 
             Dim precio As Double = Double.Parse(TextPrecio.Text)
 
-            Me._mainViewModel.OnAddPlato(nombre, precio)
+            Me._platoViewModel.OnAddPlato(nombre, precio)
             Me.ClearForm()
         Catch ex As FormatException
             MessageHandler("El precio debe ser un valor numerico")
@@ -43,7 +46,7 @@
                 Throw New Exception("Debe seleccionar primero un elemento")
             End If
 
-            Me._mainViewModel.OnDeletePlato(platoIndex)
+            Me._platoViewModel.OnDeletePlato(platoIndex)
             Me.ClearForm()
         Catch ex As Exception
             MessageHandler(ex.Message())
@@ -58,4 +61,5 @@
         Me.TextNombre.Clear()
         Me.TextPrecio.Clear()
     End Sub
+
 End Class

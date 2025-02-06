@@ -6,6 +6,18 @@ Public Class PlatoViewModel
     Implements INotifyPropertyChanged
 
     Private ReadOnly _platoService As IPlatoService
+    Private Property _selectedPlato As IPlato
+
+    Public Property SelectedPlato As IPlato
+        Get
+            Return Me._selectedPlato
+        End Get
+        Set(value As IPlato)
+            Me._selectedPlato = value
+            OnPropertyChanged()
+        End Set
+    End Property
+
     Public Property Platos As ObservableCollection(Of IPlato)
 
     Public Event PropertyChanged As PropertyChangedEventHandler Implements INotifyPropertyChanged.PropertyChanged
