@@ -1,0 +1,46 @@
+﻿<Window x:Class="MeseroWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Restaurantico"
+        mc:Ignorable="d"
+        Title="MeseroWindow" Height="450" Width="530">
+    <Grid>
+        <DockPanel LastChildFill="true">
+            <StackPanel DockPanel.Dock="Left" Width="250" Background="#FF363434">
+                <StackPanel Height="300">
+                    <Label Content="Datos del mesero" HorizontalAlignment="Center"/>
+                    <StackPanel HorizontalAlignment="center" Width="200">
+                        <Label Content="Nombre del mesero" HorizontalAlignment="Center"/>
+                        <TextBlock Text="{Binding SelectedMesero.Nombre}" FontSize="16" HorizontalAlignment="center"/>
+                    </StackPanel>
+                    <StackPanel HorizontalAlignment="center" Width="200">
+                        <Label Content="Mesas atendiendo" HorizontalAlignment="Center"/>
+                        <ListBox Height="150" ItemsSource="{Binding SelectedMesero}">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel>
+                                        <TextBlock Text="{Binding Mesas}"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel>
+                <Label Content="Lista de meseros"/>
+                <ListBox Height="150" SelectedItem="{Binding SelectedMesero, Mode=TwoWay}" ItemsSource="{Binding Meseros}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <TextBlock Text="{Binding Nombre}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </StackPanel>
+        </DockPanel>
+    </Grid>
+</Window>

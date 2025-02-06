@@ -2,7 +2,7 @@
 
 Public Interface IPlatoService
 
-    Property PlatoList As ObservableCollection(Of IPlato)
+    Property Platos As ObservableCollection(Of IPlato)
 
     Sub AddPlato(plato As IPlato)
     Sub DeletePlato(index As Int32)

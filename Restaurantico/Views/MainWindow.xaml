@@ -7,67 +7,129 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <DockPanel  LastChildFill="true">
-            <Border Background="Aquamarine" Height="70" DockPanel.Dock="Top">
-                <StackPanel Orientation="Horizontal" VerticalAlignment="center" Margin="50, 0">
-                    <TextBlock FontSize="30" Text="Resturante Los Papus"/>
-                </StackPanel>
-            </Border>
-
-            <Border Background="Azure" Width="200" DockPanel.Dock="Left">
-                <StackPanel Orientation="Vertical">
-                    <ToggleButton x:Name="SidebarToggle" Content="☰ Menu" Width="200" Height="40" Click="SidebarToggle_Click"/>
-                    <StackPanel x:Name="SidebarMenu" Orientation="Vertical" Visibility="Visible">
-                        <Button Content="Platos" Height="40"/>
-                        <Button Content="Meseros" Height="40"/>
-                        <Button Content="Clientes" Height="40"/>
-                    </StackPanel>
-                </StackPanel>
-            </Border>
-
-            <Grid>
-                <DockPanel LastChildFill="true">
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" DockPanel.Dock="Left" Width="300">
-                        <StackPanel Width="300" Orientation="Vertical">
-                            <Label FontSize="18" HorizontalAlignment="Center" Margin="0 10">Menu de platos</Label>
-
-                            <ListBox Width="200" Height="250" Margin="10" Name="ListBoxPlatos" ItemsSource="{Binding Platos}">
-                                <ListBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <StackPanel Orientation="Vertical">
-                                            <TextBlock Text="{Binding Nombre}" FontWeight="Bold"/>
-                                            <TextBlock Text="{Binding Precio}"/>
-                                        </StackPanel>
-                                    </DataTemplate>
-                                </ListBox.ItemTemplate>
-                            </ListBox>
-                        </StackPanel>
-                    </StackPanel>
-                    <DockPanel LastChildFill="true" Margin="20 20">
-                        <StackPanel Orientation="Vertical" DockPanel.Dock="Top">
-                            <Label FontSize="20" HorizontalAlignment="center" Margin="0 10">Acciones</Label>
-                        </StackPanel>
-
-                        <StackPanel Orientation="Vertical">
-                            <StackPanel Orientation="Vertical">
-                                <Label FontSize="18" HorizontalAlignment="Center" Content="Nombre del plato"/>
-                                <TextBox Text="" x:Name="TextNombre" FontSize="18" BorderBrush="Black" Margin="0 10"/>
-                            </StackPanel>
-
-                            <StackPanel Orientation="Vertical">
-                                <Label FontSize="18" HorizontalAlignment="Center" Content="Precio del plato"/>
-                                <TextBox Text="" x:Name="TextPrecio" FontSize="18" BorderBrush="Black" Margin="0 10"/>
-                            </StackPanel>
-
-                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10">
-                                <Button x:Name="ButtonGuardar" Click="ButtonGuardar_Click" Content="Guardar" Margin="0,0,10,0"/>
-                                <Button x:Name="ButtonEliminar" Click="ButtonEliminar_Click" Content="Eliminar" Margin="0,0,10,0"/>
-                                <Button x:Name="ButtonLimpiar" Click="ButtonLimpiar_Click" Content="Limpiar"/>
-                            </StackPanel>
+        <DockPanel LastChildFill="true">
+            <DockPanel Background="#FF0A112A" Width="200" DockPanel.Dock="Left" >
+                <StackPanel Orientation="Vertical" DockPanel.Dock="Top">
+                    <DockPanel Height="50" LastChildFill="true">
+                        <StackPanel Orientation="Vertical" VerticalAlignment="Center" Margin="10">
+                            <Label Foreground="White" FontSize="22" Content="Restaurantico"/>
                         </StackPanel>
                     </DockPanel>
+                    <StackPanel x:Name="SidebarMenu" Orientation="Vertical" Visibility="Visible" Height="auto">
+                        <Button Background="#FF0A112A" x:Name="PlatosPage" Click="PlatosPage_Click" Height="40" BorderBrush="{x:Null}">
+                            <DockPanel Width="200">
+                                <Label FontSize="14" Foreground="White" Margin="10 0" DockPanel.Dock="Left" Content="Platos"/>
+                            </DockPanel>
+                        </Button>
+                        <Button Background="#FF0A112A" x:Name="MeseroWindow" Click="MeseroWindow_Click"
+                                Height="40" BorderBrush="{x:Null}">
+                            <DockPanel Width="200">
+                                <Label FontSize="14" Foreground="White" Margin="10 0" DockPanel.Dock="Left" Content="Meseros"/>
+                            </DockPanel>
+                        </Button>
+                        <Button Background="#FF0A112A" Height="40" BorderBrush="{x:Null}">
+                            <DockPanel Width="200">
+                                <Label FontSize="14" Foreground="White" Margin="10 0" DockPanel.Dock="Left" Content="Clientes"/>
+                            </DockPanel>
+                        </Button>
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel DockPanel.Dock="Bottom" VerticalAlignment="Bottom">
+                    <Button x:Name="ButtonExit" Background="#FF0A112A" HorizontalAlignment="Stretch" BorderBrush="{x:Null}" Margin="0 5" Click="ButtonExit_Click">
+                        <DockPanel Width="200">
+                            <Label FontSize="14" Foreground="White" Margin="10 0" Content="Salir del programa" DockPanel.Dock="Left"/>
+                        </DockPanel>
+                    </Button>
+                </StackPanel>
+            </DockPanel>
+
+            <DockPanel LastChildFill="true" >
+                <DockPanel LastChildFill="true"  Background="#FF070C1D" Height="50" Width="auto" DockPanel.Dock="Top">
+                    <StackPanel Orientation="Vertical" VerticalAlignment="Center" Margin="10">
+                        <Label Foreground="White" FontSize="20" Content="Dashboard" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0"/>
+                    </StackPanel>
                 </DockPanel>
-            </Grid>
+                <Grid Background="#FF070C1D" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="100"/>
+                        <RowDefinition Height="250"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Border Grid.Row="0" Grid.Column="0" Margin="10" CornerRadius="5">
+                        <Border.Background>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="Black"/>
+                                <GradientStop Color="#FF111542" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Border.Background>
+                        <StackPanel Width="auto" Orientation="Vertical">
+                            <TextBlock FontSize="14" Foreground="white" Text="Meseros" Margin="10 5"/>
+                            <TextBlock FontSize="22" Foreground="white" Text="{Binding Meseros.Count}" Margin="10 0"/>
+                        </StackPanel>
+                    </Border>
+
+                    <Border Grid.Row="0" Grid.Column="1" Margin="10" CornerRadius="5">
+                        <Border.Background>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="Black"/>
+                                <GradientStop Color="#FF112E42" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Border.Background>
+                        <StackPanel>
+                            <TextBlock FontSize="14" Foreground="white" Text="Platos" Margin="10 5"/>
+                            <TextBlock FontSize="22" Foreground="white" Text="{Binding Platos.Count}" Margin="10 0"/>
+                        </StackPanel>
+                    </Border>
+
+                    <Border Grid.Row="0" Grid.Column="2"  Margin="10" CornerRadius="10">
+                        <Border.Background>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="Black"/>
+                                <GradientStop Color="#FF3A1142" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Border.Background>
+                        <StackPanel>
+                            <TextBlock FontSize="14" Foreground="white" Text="Pedidos" Margin="10 5"/>
+                            <TextBlock FontSize="22" Foreground="white" Text="" Margin="10 0"/>
+                        </StackPanel>
+                    </Border>
+
+                    <Border Grid.Row="1" Grid.Column="0" Margin="10" CornerRadius="10" Background="#FF0A112A">
+                        <DockPanel LastChildFill="true">
+                            <Border DockPanel.Dock="top" BorderBrush="#FF070C1D" BorderThickness="0,0,0,2">
+                                <Grid Height="30"  >
+                                    <TextBlock FontSize="14" Foreground="white" Text="Mesas disponibles" VerticalAlignment="Center" Margin="10 0"/>
+                                </Grid>
+                            </Border>
+                            
+                            <StackPanel>
+                                
+                            </StackPanel>
+                        </DockPanel>
+                    </Border>
+
+                    <Border Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"  Margin="10" CornerRadius="10" Background="#FF0A112A">
+                        <DockPanel LastChildFill="true">
+                            <Border DockPanel.Dock="top" BorderBrush="#FF070C1D" BorderThickness="0,0,0,2">
+                                <Grid Height="30"  >
+                                    <TextBlock FontSize="14" Foreground="white" Text="Pedidos siendo atendidos" VerticalAlignment="Center" Margin="10 0"/>
+                                </Grid>
+                            </Border>
+
+                            <StackPanel>
+
+                            </StackPanel>
+                        </DockPanel>
+                    </Border>
+                </Grid>
+            </DockPanel>
+
+
         </DockPanel>
     </Grid>
 </Window>
