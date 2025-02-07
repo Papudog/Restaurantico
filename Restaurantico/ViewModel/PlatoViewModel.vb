@@ -1,9 +1,7 @@
 ﻿Imports System.Collections.ObjectModel
-Imports System.ComponentModel
-Imports System.Runtime.CompilerServices
 
 Public Class PlatoViewModel
-    Implements INotifyPropertyChanged
+    Inherits ObservableTrigger
 
     Private ReadOnly _platoService As IPlatoService
     Private Property _selectedPlato As IPlato
@@ -20,7 +18,6 @@ Public Class PlatoViewModel
 
     Public Property Platos As ObservableCollection(Of IPlato)
 
-    Public Event PropertyChanged As PropertyChangedEventHandler Implements INotifyPropertyChanged.PropertyChanged
     Public Event ShowMessage As Action(Of String)
 
     Sub New(platoService As IPlatoService)
@@ -40,9 +37,5 @@ Public Class PlatoViewModel
         RaiseEvent ShowMessage($"El plato {_platoService.Platos(index).Nombre} ha sido eliminado")
         Me._platoService.DeletePlato(index)
         OnPropertyChanged(NameOf(Platos))
-    End Sub
-
-    Protected Sub OnPropertyChanged(<CallerMemberName> Optional propertyName As String = Nothing)
-        RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(propertyName))
     End Sub
 End Class

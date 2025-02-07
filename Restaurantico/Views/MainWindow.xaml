@@ -12,151 +12,67 @@
         Background="Transparent"
         >
     <Grid>
-        <Border CornerRadius="10" Background="#FF0A112A" BorderBrush="Transparent" BorderThickness="1" Padding="5">
+        <Border CornerRadius="10" Background="#272537" BorderBrush="Transparent" BorderThickness="1">
             <Grid>
 
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="180"/>
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
 
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="70"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Column="0" Grid.Row="0" Foreground="White" FontSize="20" Text="Restaurantico" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+
+                <StackPanel Grid.Row="1" Orientation="Vertical" Height="auto" Grid.Column="0">
+                    <RadioButton x:Name="PlatosPage" Content="Platos" Height="50" Click="PlatosPage_Click" Style="{StaticResource SiderbarButton}"/>
+                    <RadioButton  x:Name="MeseroWindow" Content="Meseros" Height="50" Click="MeseroWindow_Click" Style="{StaticResource SiderbarButton}"/>
+                    <RadioButton Content="Clientes" Height="50" Style="{StaticResource SiderbarButton}"/>
+                    <RadioButton  x:Name="ButtonExit" Content="Salir del programa" Height="50" Click="ButtonExit_Click" Style="{StaticResource SiderbarButton}"/>
+                </StackPanel>
 
 
-                <Border Grid.Column="0"  Padding="10">
-                    <DockPanel Background="#FF0A112A">
-                        <StackPanel Orientation="Vertical" DockPanel.Dock="Top">
-                            <Grid Height="50">
-                                <StackPanel Orientation="Vertical" VerticalAlignment="Center" Margin="5">
-                                    <Label Foreground="White" FontSize="20" Content="Restaurantico"/>
-                                </StackPanel>
-                            </Grid>
-                            <StackPanel Orientation="Vertical" Height="auto">
-                                
-                                <Button Background="#FF0A112A" x:Name="PlatosPage" Click="PlatosPage_Click" Height="40" BorderBrush="{x:Null}">
-                                    <Grid Width="150">
-                                        <StackPanel >
-                                            <Label FontSize="14" Foreground="White" Margin="5 0" Content="Platos"/>
-                                        </StackPanel>
-                                    </Grid>
-                                </Button>
-                                <Button Background="#FF0A112A" x:Name="MeseroWindow" Click="MeseroWindow_Click" Height="40" BorderBrush="{x:Null}">
-                                    <Grid Width="150">
-                                        <StackPanel >
-                                            <Label FontSize="14" Foreground="White" Margin="5 0" DockPanel.Dock="Left" Content="Meseros"/>
-                                        </StackPanel>
-                                    </Grid>
-                                </Button>
-                                <Button Background="#FF0A112A" Height="40" BorderBrush="{x:Null}">
-                                    <Grid Width="150">
-                                        <StackPanel >
-                                            <Label FontSize="14" Foreground="White" Margin="5 0" DockPanel.Dock="Left" Content="Clientes"/>
-                                        </StackPanel>
-                                    </Grid>
-                                </Button>
-                            </StackPanel>
+
+                <TextBlock Grid.Column="1" Grid.Row="0" Text="Dashboard" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="White" Margin="10,0,0,0"/>
+
+
+
+                <Grid Grid.Column="1" Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="80"/>
+                        <RowDefinition Height="280"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Border Grid.Row="0" Grid.Column="0" Margin="10" CornerRadius="5" Background="#FF40BBE4">
+                        <StackPanel Width="auto" Orientation="Vertical">
+                            <TextBlock FontSize="14" Foreground="white" Text="Meseros" Margin="10 5"/>
+                            <TextBlock FontSize="22" Foreground="white" Text="{Binding Meseros.Count}" Margin="10 0"/>
                         </StackPanel>
-                        <StackPanel DockPanel.Dock="Bottom" VerticalAlignment="Bottom">
-                            <Button x:Name="ButtonExit" Background="#FF0A112A" HorizontalAlignment="Stretch" BorderBrush="{x:Null}" Margin="0 5" Click="ButtonExit_Click">
-                                <Grid Width="150">
-                                    <StackPanel >
-                                        <Label FontSize="14" Foreground="White" Margin="10 0" Content="Salir del programa" DockPanel.Dock="Left"/>
-                                    </StackPanel>
-                                </Grid>
-                            </Button>
+                    </Border>
+
+                    <Border Grid.Row="0" Grid.Column="1" Margin="10" CornerRadius="5"  Background="#FF404EE4">
+                        <StackPanel>
+                            <TextBlock FontSize="14" Foreground="white" Text="Platos" Margin="10 5"/>
+                            <TextBlock FontSize="22" Foreground="white" Text="{Binding Platos.Count}" Margin="10 0"/>
                         </StackPanel>
-                    </DockPanel>
-                </Border>
+                    </Border>
 
-                <Border Grid.Column="1" CornerRadius="10" Background="#FF070C1D" Padding="10">
-                    <StackPanel >
-                        <DockPanel LastChildFill="true"   Height="50" Width="auto" DockPanel.Dock="Top">
-                            <StackPanel Orientation="Vertical" VerticalAlignment="Center" Margin="10">
-                                <Label Foreground="White" FontSize="20" Content="Dashboard" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0"/>
-                            </StackPanel>
-                        </DockPanel>
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="80"/>
-                                <RowDefinition Height="280"/>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
+                    <Border Grid.Row="0" Grid.Column="2"  Margin="10" CornerRadius="5"  Background="#FFE49F40">
+                        <StackPanel>
+                            <TextBlock FontSize="14" Foreground="white" Text="Pedidos" Margin="10 5"/>
+                            <TextBlock FontSize="22" Foreground="white" Text="" Margin="10 0"/>
+                        </StackPanel>
+                    </Border>
 
-                            <Border Grid.Row="0" Grid.Column="0" Margin="10" CornerRadius="5">
-                                <Border.Background>
-                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                        <GradientStop Color="Black"/>
-                                        <GradientStop Color="#FF111542" Offset="1"/>
-                                    </LinearGradientBrush>
-                                </Border.Background>
-                                <StackPanel Width="auto" Orientation="Vertical">
-                                    <TextBlock FontSize="14" Foreground="white" Text="Meseros" Margin="10 5"/>
-                                    <TextBlock FontSize="22" Foreground="white" Text="{Binding Meseros.Count}" Margin="10 0"/>
-                                </StackPanel>
-                            </Border>
-
-                            <Border Grid.Row="0" Grid.Column="1" Margin="10" CornerRadius="5">
-                                <Border.Background>
-                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                        <GradientStop Color="Black"/>
-                                        <GradientStop Color="#FF112E42" Offset="1"/>
-                                    </LinearGradientBrush>
-                                </Border.Background>
-                                <StackPanel>
-                                    <TextBlock FontSize="14" Foreground="white" Text="Platos" Margin="10 5"/>
-                                    <TextBlock FontSize="22" Foreground="white" Text="{Binding Platos.Count}" Margin="10 0"/>
-                                </StackPanel>
-                            </Border>
-
-                            <Border Grid.Row="0" Grid.Column="2"  Margin="10" CornerRadius="5">
-                                <Border.Background>
-                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                        <GradientStop Color="Black"/>
-                                        <GradientStop Color="#FF3A1142" Offset="1"/>
-                                    </LinearGradientBrush>
-                                </Border.Background>
-                                <StackPanel>
-                                    <TextBlock FontSize="14" Foreground="white" Text="Pedidos" Margin="10 5"/>
-                                    <TextBlock FontSize="22" Foreground="white" Text="" Margin="10 0"/>
-                                </StackPanel>
-                            </Border>
-
-                            <Border Grid.Row="1" Grid.Column="0" Margin="10" CornerRadius="10" Background="#FF0A112A">
-                                <DockPanel LastChildFill="true">
-                                    <Border DockPanel.Dock="top" BorderBrush="#FF070C1D" BorderThickness="0,0,0,2">
-                                        <Grid Height="30"  >
-                                            <TextBlock FontSize="14" Foreground="white" Text="Mesas libres" VerticalAlignment="Center" Margin="10 0"/>
-                                        </Grid>
-                                    </Border>
-
-
-                                    <StackPanel VerticalAlignment="Stretch">
-                                        
-                                    </StackPanel>
-                                </DockPanel>
-                            </Border>
-
-                            <Border Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"  Margin="10" CornerRadius="5" Background="#FF0A112A">
-                                <DockPanel LastChildFill="true">
-                                    <Border DockPanel.Dock="top" BorderBrush="#FF070C1D" BorderThickness="0,0,0,2">
-                                        <Grid Height="30"  >
-                                            <TextBlock FontSize="14" Foreground="white" Text="Pedidos siendo atendidos" VerticalAlignment="Center" Margin="10 0"/>
-                                        </Grid>
-                                    </Border>
-
-
-                                    <StackPanel VerticalAlignment="Stretch">
-                                        
-                                    </StackPanel>
-                                </DockPanel>
-                            </Border>
-                        </Grid>
-                    </StackPanel>
-                </Border>
-               
+                </Grid>
             </Grid>
 
 

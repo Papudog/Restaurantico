@@ -62,4 +62,7 @@ Public Class PlatoWindow
         Me.TextPrecio.Clear()
     End Sub
 
+    Private Sub CloseButton_Click(sender As Object, e As RoutedEventArgs)
+        Me.Close()
+    End Sub
 End Class
