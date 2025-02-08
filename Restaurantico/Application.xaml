@@ -9,6 +9,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Components/SidebarButton.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+            <local:MetodoConverter x:Key="MetodoConverter"/>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

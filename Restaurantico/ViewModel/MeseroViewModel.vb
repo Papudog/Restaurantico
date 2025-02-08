@@ -1,12 +1,9 @@
 ﻿Imports System.Collections.ObjectModel
-Imports System.ComponentModel
-Imports System.Runtime.CompilerServices
 
 Public Class MeseroViewModel
-    Implements INotifyPropertyChanged
+    Inherits ObservableTrigger
     Private Property _meseroService As IMeseroService
     Private Property _selectedMesero As IMesero
-
 
     Public Property SelectedMesero As IMesero
         Get
@@ -25,11 +22,7 @@ Public Class MeseroViewModel
         Me.Meseros = meseroService.Meseros
     End Sub
 
-    Public Event PropertyChanged As PropertyChangedEventHandler Implements INotifyPropertyChanged.PropertyChanged
-
-
-    Protected Sub OnPropertyChanged(<CallerMemberName> Optional propertyName As String = Nothing)
-        RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(propertyName))
+    Sub OnAddMesero(mesero As IMesero)
+        Me._meseroService.AddMesero(mesero)
     End Sub
-
 End Class

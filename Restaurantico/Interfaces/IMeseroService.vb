@@ -3,6 +3,6 @@
 Public Interface IMeseroService
     Property Meseros As ObservableCollection(Of IMesero)
 
-    Sub AsignMesa(mesa As IMesa)
-    Function WhichMesas() As List(Of IMesa)
+    Sub AddMesero(mesero As IMesero)
+    Sub DeleteMesero(index As Integer)
 End Interface

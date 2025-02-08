@@ -3,11 +3,11 @@
 Public Class MeseroService
     Implements IMeseroService
 
-    Private Property _meseros As New ObservableCollection(Of IMesero)
+    Private Property _meseros As ObservableCollection(Of IMesero)
 
-    Private Property IMeseroService_Meseros As ObservableCollection(Of IMesero) Implements IMeseroService.Meseros
+    Public Property Meseros As ObservableCollection(Of IMesero) Implements IMeseroService.Meseros
         Get
-            If Me._meseros.Count = 0 Then
+            If Me._meseros Is Nothing OrElse Me._meseros.Count = 0 Then
                 Me._meseros = PopulateDefaultMeseros()
             End If
             Return Me._meseros
@@ -17,21 +17,21 @@ Public Class MeseroService
         End Set
     End Property
 
-    Public Sub AsignMesa(mesa As IMesa) Implements IMeseroService.AsignMesa
-        Throw New NotImplementedException()
-    End Sub
-
-    Public Function WhichMesas() As List(Of IMesa) Implements IMeseroService.WhichMesas
-        Throw New NotImplementedException()
-    End Function
-
     Private Function PopulateDefaultMeseros() As ObservableCollection(Of IMesero)
         Return New ObservableCollection(Of IMesero) From {
-            New Mesero With {.Nombre = "Jose", .Imagen = "", .Mesas = New List(Of IMesa)},
-            New Mesero With {.Nombre = "Rodolfo", .Imagen = "", .Mesas = New List(Of IMesa)},
-            New Mesero With {.Nombre = "Roberto", .Imagen = "", .Mesas = New List(Of IMesa)},
-            New Mesero With {.Nombre = "Hugo", .Imagen = "", .Mesas = New List(Of IMesa)},
-            New Mesero With {.Nombre = "Ricardo", .Imagen = "", .Mesas = New List(Of IMesa)}
+            New Mesero With {.Nombre = "Jose", .Mesas = New ObservableCollection(Of IMesa)},
+            New Mesero With {.Nombre = "Rodolfo", .Mesas = New ObservableCollection(Of IMesa)},
+            New Mesero With {.Nombre = "Roberto", .Mesas = New ObservableCollection(Of IMesa)},
+            New Mesero With {.Nombre = "Hugo", .Mesas = New ObservableCollection(Of IMesa)},
+            New Mesero With {.Nombre = "Ricardo", .Mesas = New ObservableCollection(Of IMesa)}
         }
     End Function
+
+    Public Sub AddMesero(mesero As IMesero) Implements IMeseroService.AddMesero
+        Me._meseros.Add(mesero)
+    End Sub
+
+    Public Sub DeleteMesero(index As Integer) Implements IMeseroService.DeleteMesero
+        Me._meseros.RemoveAt(index)
+    End Sub
 End Class

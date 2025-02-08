@@ -1,0 +1,194 @@
+﻿<Window x:Class="PedidoWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Restaurantico"
+        mc:Ignorable="d"
+        Title="PedidoWindow" Height="520" Width="400"
+        WindowStyle="None"
+        Background="Transparent"         
+        AllowsTransparency="True"
+        >
+
+    <Window.Resources>
+        <Style TargetType="ComboBox">
+            <Setter Property="Foreground" Value="#22202f"/>
+            <Setter Property="Background" Value="#22202f"/>
+            <Setter Property="BorderBrush" Value="#FF16151E"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="Margin" Value="0 10"/>
+        </Style>
+
+        <Style TargetType="ComboBoxItem">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Background" Value="#22202f"/>
+            <Setter Property="BorderBrush" Value="#FF16151E"/>
+            <Setter Property="BorderThickness" Value="2"/>
+        </Style>
+
+        <Style TargetType="TextBox">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Background" Value="#22202f"/>
+            <Setter Property="BorderBrush" Value="#FF16151E"/>
+        </Style>
+
+        <Style TargetType="Label">
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+    </Window.Resources>
+
+
+    <Grid>
+        <Border CornerRadius="10" Background="#272537" BorderBrush="Transparent" BorderThickness="1">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"></RowDefinition>
+                    <RowDefinition Height="400"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0" Margin="10 0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="350"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Foreground="White" FontSize="16" Text="Datos sobre el pedido" Grid.Column="0" VerticalAlignment="Center"/>
+                    <Button Grid.Column="1" Background="{x:Null}" HorizontalAlignment="center" VerticalAlignment="Center" BorderBrush="{x:Null}" x:Name="CloseButton" Click="CloseButton_Click">
+                        <TextBlock  Foreground="White" FontSize="20" Text="X" DockPanel.Dock="Right"/>
+                    </Button>
+                </Grid>
+
+
+                <StackPanel Grid.Column="0" Grid.Row="1" Margin="20 0">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="65"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" Foreground="White" FontSize="14" VerticalAlignment="Center" Content="Cliente"/>
+                        <Border Grid.Column="1" CornerRadius="5" BorderBrush="#FF16151E" Background="#22202f" BorderThickness="2" Margin="0 10">
+                            <TextBox Foreground="White" Text="{Binding Cliente}" x:Name="TextNombre" FontSize="14" VerticalAlignment="Center" Background="Transparent" BorderBrush="Transparent"/>
+                        </Border>
+                    </Grid>
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="65"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" Foreground="White" FontSize="14" VerticalAlignment="Center" Content="Mesero"/>
+                        <ComboBox Grid.Column="1" ItemsSource="{Binding Meseros}" SelectedItem="{Binding SelectedMesero}" DisplayMemberPath="Nombre"/>
+                    </Grid>
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="65"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" Foreground="White" FontSize="14" VerticalAlignment="Center" Content="Mesa"/>
+                        <ComboBox Grid.Column="1" ItemsSource="{Binding Mesas}" SelectedItem="{Binding SelectedMesa}" DisplayMemberPath="Numero"/>
+                    </Grid>
+
+                    <StackPanel Height="30" Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Center">
+                        <Label Content="Metodo de pago:" Foreground="White"/>
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Width="200">
+                            <RadioButton x:Name="Efectivo" 
+                                         Foreground="White" 
+                                         Content="Efectivo" 
+                                         Margin="10 0"
+                                         IsChecked="{Binding SelectedMetodo, Mode=TwoWay,Converter={StaticResource MetodoConverter},ConverterParameter=Efectivo}"/>
+
+                            <RadioButton  x:Name="Tarjeta" 
+                                          Foreground="White" 
+                                          Content="Tarjeta" 
+                                          Margin="10 0"
+                                          IsChecked="{Binding SelectedMetodo, Mode=TwoWay, Converter={StaticResource MetodoConverter}, ConverterParameter=Tarjeta}"/>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <Grid x:Name="TarjetaField">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="65"></ColumnDefinition>
+                            <ColumnDefinition Width="*">
+                            </ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" Foreground="White" FontSize="14" VerticalAlignment="Center" Content="Tarjeta"/>
+                        <Border Grid.Column="1" CornerRadius="5" BorderBrush="#FF16151E" Background="#22202f" BorderThickness="2" Margin="0 10">
+                            <TextBox Foreground="White" x:Name="TextTipoPago" Text="{Binding NumeroTarjeta}"  FontSize="14" VerticalAlignment="Center" Background="Transparent" BorderBrush="Transparent"/>
+                        </Border>
+                    </Grid>
+
+
+                    <Grid Margin="0 10">
+                        <Grid.Resources>
+                            <Style TargetType="ListBox">
+                                <Setter Property="Margin" Value="5 0"/>
+                                <Setter Property="Background" Value="#22202f"/>
+                                <Setter Property="BorderBrush" Value="#FF16151E"/>
+                            </Style>
+                        </Grid.Resources>
+                        
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="30"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="60"/>
+                        </Grid.RowDefinitions>
+                        
+                        
+                        <ListBox x:Name="ListPlatos" Grid.Column="0" Height="120" ItemsSource="{Binding Platos}">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel>
+                                        <TextBlock Foreground="White" x:Name="PlatoNombre" Text="{Binding Nombre}"/>
+                                        <TextBlock Foreground="White" x:Name="PlatoPrecio" Text="{Binding Precio}"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+
+                        <ListBox Grid.Column="2" Height="120" ItemsSource="{Binding SelectedPlatos}">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel>
+                                        <TextBlock Foreground="White" x:Name="PlatoNombreSelected" Text="{Binding Nombre}"/>
+                                        <TextBlock Foreground="White" x:Name="PlatoPrecioSelected" Text="{Binding Precio}"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+
+                        <Border  Height="30"  Grid.Column="1" Grid.Row="0" Background="#22202f">
+                            <Button x:Name="ButtonPlato" Click="ButtonPlato_Click" Foreground="White" Background="Transparent" Content=">" FontSize="14" BorderBrush="Transparent"/>
+                        </Border>
+
+                        <StackPanel Grid.Row="1" Orientation="Vertical" VerticalAlignment="Center">
+                            <Label HorizontalAlignment="Center" Content="Subtotal"/>
+                            <TextBox Text="{Binding Subtotal}"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Row="1" Grid.Column="2" Orientation="Vertical" VerticalAlignment="Center">
+                            <Label HorizontalAlignment="Center" Content="Total (IVA)"/>
+                            <TextBox Text="{Binding Iva}" />
+                        </StackPanel>
+                    </Grid>
+                </StackPanel>
+
+
+                <StackPanel Grid.Row="2">
+                    <Border  Margin="20,5,20,0" Height="30"  Grid.Column="0" Grid.Row="1" Background="Azure" CornerRadius="10">
+                        <Button x:Name="ButtonAddPedido" Click="ButtonAddPedido_Click" Background="Transparent" Content="Crear pedido" FontSize="14" BorderBrush="Transparent"/>
+                    </Border>
+                </StackPanel>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

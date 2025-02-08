@@ -5,24 +5,39 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Restaurantico"
         mc:Ignorable="d"
-        Title="MeseroWindow" Height="250" Width="400"
+        Title="MeseroWindow" Height="360" Width="300"
         AllowsTransparency="true"
-        WindowStartupLocation="CenterScreen" 
         WindowStyle="None"
         Background="Transparent"
         >
     <Grid>
-        <Border CornerRadius="10" Background="#FF0A112A" BorderBrush="Transparent" BorderThickness="1" Padding="5">
+        <Border CornerRadius="10" Background="#272537" BorderBrush="#FF16151E" BorderThickness="2">
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="200"/>
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"></RowDefinition>
+                    <RowDefinition Height="150"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
 
-                <StackPanel Grid.Column="0">
-                    <StackPanel Height="250">
-                        <Label Foreground="White" Content="Lista de meseros" HorizontalAlignment="Center"/>
-                        <ListBox Height="150" Width="180" Background="#FF070C1D" BorderBrush="#FF65A3DE" SelectedItem="{Binding SelectedMesero, Mode=TwoWay}" ItemsSource="{Binding Meseros}">
+                <Grid Grid.Row="0" Margin="10 0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="250"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Foreground="White" FontSize="16" Text="Lista de meseros" Grid.Column="0" VerticalAlignment="Center"/>
+                    <Button Grid.Column="1" Background="{x:Null}" HorizontalAlignment="center" VerticalAlignment="Center" BorderBrush="{x:Null}" x:Name="CloseButton" Click="CloseButton_Click">
+                        <TextBlock  Foreground="White" FontSize="20" Text="X" DockPanel.Dock="Right"/>
+                    </Button>
+                </Grid>
+
+
+                <StackPanel Grid.Column="0" Grid.Row="1">
+                    <StackPanel Orientation="Vertical">
+                        <ListBox Background="#22202f" BorderBrush="#FF16151E" Height="130" Margin="10" SelectedItem="{Binding SelectedMesero, Mode=TwoWay}" ItemsSource="{Binding Meseros}">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel>
@@ -33,18 +48,51 @@
                         </ListBox>
                     </StackPanel>
                 </StackPanel>
-                <StackPanel Grid.Column="1">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="65"></ColumnDefinition>
-                            <ColumnDefinition Width="100"></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-                        <Label Grid.Column="0" Foreground="White" FontSize="14" VerticalAlignment="Center" Content="Nombre"/>
-                        <Border Grid.Column="1" CornerRadius="5" BorderBrush="#FF65A3DE" Background="#FF070C1D" BorderThickness="1" Margin="0 10">
-                            <TextBox Foreground="White" Text="{Binding SelectedPlato.Nombre}" x:Name="TextNombre" FontSize="14" VerticalAlignment="Center" Background="Transparent" BorderBrush="Transparent" />
-                        </Border>
-                    </Grid>
+
+
+                <StackPanel Grid.Row="2" Grid.Column="0" Margin="20 0">
+                    <StackPanel Orientation="Vertical">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="65"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0" Foreground="White" FontSize="14" VerticalAlignment="Center" Content="Nombre"/>
+                            <Border Grid.Column="1" CornerRadius="5" BorderBrush="#FF16151E" Background="#22202f" BorderThickness="2" Margin="0 10">
+                                <TextBox Foreground="White" Text="{Binding SelectedMesero.Nombre}" x:Name="TextNombre" FontSize="14" VerticalAlignment="Center" Background="Transparent" BorderBrush="Transparent" />
+                            </Border>
+                        </Grid>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="65"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0" Foreground="White" FontSize="14" VerticalAlignment="Center" Content="Mesas"/>
+
+                            <Border Grid.Column="1" CornerRadius="5" BorderBrush="#FF16151E" Background="#22202f" BorderThickness="2" Margin="0 10">
+                                <TextBlock Foreground="White" Text="{Binding SelectedMesero.Mesas}" FontSize="14" VerticalAlignment="Center" Background="Transparent" />
+                            </Border>
+
+                        </Grid>
+
+                        <Grid HorizontalAlignment="Center" Margin="0 10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="120"></ColumnDefinition>
+                                <ColumnDefinition Width="120"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+
+                            <Border CornerRadius="5" BorderThickness="1" Background="#FF65A3DE" Grid.Column="0" Margin="5 0">
+                                <Button  x:Name="ButtonGuardar" Click="ButtonGuardar_Click" Content="Agregar" Background="Transparent" BorderBrush="{x:Null}"/>
+                            </Border>
+
+                            <Border CornerRadius="5" BorderThickness="1" BorderBrush="#FF65A3DE" Grid.Column="1" Margin="5 0">
+                                <Button  x:Name="ButtonEliminar" Click="ButtonEliminar_Click" Content="Eliminar" Background="Transparent" BorderBrush="{x:Null}" Foreground="White"/>
+                            </Border>
+                        </Grid>
+                    </StackPanel>
                 </StackPanel>
+
             </Grid>
 
         </Border>

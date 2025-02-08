@@ -1,15 +1,14 @@
-﻿<Window x:Class="PlatoWindow"
+﻿<Window x:Class="MesaWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Restaurantico"
         mc:Ignorable="d"
-        Title="PlatoPage" Height="360" Width="300"
-        AllowsTransparency="true"
-        WindowStartupLocation="Manual" 
-        WindowStyle="None"
+        Title="MesaWindow" Height="350" Width="300"
         Background="Transparent"
+        WindowStyle="None"
+        AllowsTransparency="True"
         >
     <Grid>
         <Border CornerRadius="10" Background="#272537" BorderBrush="#FF16151E" BorderThickness="2">
@@ -29,27 +28,26 @@
                         <ColumnDefinition Width="*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
 
-                    <TextBlock Foreground="White" FontSize="16" Text="Menú de platos" Grid.Column="0" VerticalAlignment="Center"/>
+                    <TextBlock Foreground="White" FontSize="16" Text="Lista de mesas" Grid.Column="0" VerticalAlignment="Center"/>
                     <Button Grid.Column="1" Background="{x:Null}" HorizontalAlignment="center" VerticalAlignment="Center" BorderBrush="{x:Null}" x:Name="CloseButton" Click="CloseButton_Click">
-                        <TextBlock  Foreground="White" FontSize="20" Text="X" DockPanel.Dock="Right"/>
+                        <TextBlock  Foreground="White" FontSize="16" Text="X" DockPanel.Dock="Right"/>
                     </Button>
                 </Grid>
-
                 <StackPanel Grid.Column="0" Grid.Row="1">
-                    <StackPanel Orientation="Vertical">
-                        <ListBox Background="#22202f" BorderBrush="#FF16151E" Height="130" Margin="10" Name="ListBoxPlatos" SelectedItem="{Binding SelectedPlato, Mode=TwoWay}" ItemsSource="{Binding Platos}">
-                            <ListBox.ItemTemplate>
-                                <DataTemplate>
-                                    <StackPanel Orientation="Vertical">
-                                        <TextBlock Foreground="White" Text="{Binding Nombre}" FontWeight="Bold"/>
-                                        <TextBlock Foreground="White" Text="{Binding Precio}"/>
-                                    </StackPanel>
-                                </DataTemplate>
-                            </ListBox.ItemTemplate>
-                        </ListBox>
-                    </StackPanel>
+                    <Grid>
+                        <StackPanel Orientation="Vertical" Grid.Column="0">
+                            <ListBox Background="#22202f" BorderBrush="#FF16151E" Height="130" Margin="10" SelectedItem="{Binding SelectedMesa, Mode=TwoWay}" ItemsSource="{Binding Mesas}">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Vertical">
+                                            <TextBlock Foreground="White" Text="{Binding Numero}" FontWeight="Bold"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </StackPanel>
+                    </Grid>
                 </StackPanel>
-
 
                 <StackPanel Grid.Row="2" Grid.Column="0" Margin="20 0">
                     <StackPanel Orientation="Vertical">
@@ -58,9 +56,9 @@
                                 <ColumnDefinition Width="65"></ColumnDefinition>
                                 <ColumnDefinition Width="*"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-                            <Label Grid.Column="0" Foreground="White" FontSize="14" VerticalAlignment="Center" Content="Nombre"/>
+                            <Label Grid.Column="0" Foreground="White" FontSize="14" VerticalAlignment="Center" Content="Mesa"/>
                             <Border Grid.Column="1" CornerRadius="5" BorderBrush="#FF16151E" Background="#22202f" BorderThickness="2" Margin="0 10">
-                                <TextBox Foreground="White" Text="{Binding SelectedPlato.Nombre}" x:Name="TextNombre" FontSize="14" VerticalAlignment="Center" Background="Transparent" BorderBrush="Transparent" />
+                                <TextBox Foreground="White" Text="{Binding SelectedMesa.Numero}" x:Name="TextNombre" FontSize="14" VerticalAlignment="Center" Background="Transparent" BorderBrush="Transparent" />
                             </Border>
                         </Grid>
 
@@ -69,10 +67,10 @@
                                 <ColumnDefinition Width="65"></ColumnDefinition>
                                 <ColumnDefinition Width="*"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-                            <Label Grid.Column="0" Foreground="White" FontSize="14" VerticalAlignment="Center" Content="Precio"/>
+                            <Label Grid.Column="0" Foreground="White" FontSize="14" VerticalAlignment="Center" Content="Mesero"/>
 
                             <Border Grid.Column="1" CornerRadius="5" BorderBrush="#FF16151E" Background="#22202f" BorderThickness="2" Margin="0 10">
-                                <TextBox Foreground="White" Text="{Binding SelectedPlato.Precio}" x:Name="TextPrecio" FontSize="14" VerticalAlignment="Center" Background="Transparent" BorderBrush="Transparent" />
+                                <TextBlock Foreground="White" Text="{Binding SelectedMesa.Mesero.Nombre}" x:Name="TextPrecio" FontSize="14" VerticalAlignment="Center" Background="Transparent" />
                             </Border>
 
                         </Grid>
@@ -84,17 +82,16 @@
                             </Grid.ColumnDefinitions>
 
                             <Border CornerRadius="5" BorderThickness="1" Background="#FF65A3DE" Grid.Column="0" Margin="5 0">
-                                <Button  x:Name="ButtonGuardar" Click="ButtonGuardar_Click" Content="Agregar" Background="Transparent" BorderBrush="{x:Null}"/>
+                                <Button  x:Name="ButtonGuardar"  Content="Agregar" Background="Transparent" BorderBrush="{x:Null}"/>
                             </Border>
 
                             <Border CornerRadius="5" BorderThickness="1" BorderBrush="#FF65A3DE" Grid.Column="1" Margin="5 0">
-                                <Button  x:Name="ButtonEliminar" Click="ButtonEliminar_Click" Content="Eliminar" Background="Transparent" BorderBrush="{x:Null}" Foreground="White"/>
+                                <Button  x:Name="ButtonEliminar"  Content="Eliminar" Background="Transparent" BorderBrush="{x:Null}" Foreground="White"/>
                             </Border>
                         </Grid>
                     </StackPanel>
                 </StackPanel>
             </Grid>
-
         </Border>
     </Grid>
 </Window>
